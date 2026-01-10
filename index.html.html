@@ -1,14 +1,436 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Baseline — Social media infrastructure for accountancy firms</title>
-    <meta name="description" content="Quiet maintenance that keeps your online presence credible and consistent. Built for UK accountancy firms." />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baseline - Social Media Infrastructure for Accountants</title>
+    <meta name="description" content="Quiet maintenance that keeps your accountancy firm looking credible and consistent online.">
+    
+    <!-- 
+    DEPLOYMENT INSTRUCTIONS:
+    1. Save this file as: index.html
+    2. Deploy to Vercel: drag and drop this file into vercel.com/new
+    3. Or GitHub Pages: create a repo, upload this file, enable Pages in Settings
+    4. Or Netlify: drag and drop into netlify.com/drop
+    5. Update the Instagram link (line 280) to your actual handle
+    -->
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #1a1a1a;
+        }
+        
+        nav {
+            display: none;
+        }
+        
+        @media (min-width: 640px) {
+            nav {
+                display: block;
+            }
+            
+            nav a {
+                margin-left: 28px;
+                font-size: 15px;
+                color: #4a4a4a;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+            
+            nav a:hover {
+                color: #1a1a1a;
+            }
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            text-align: left;
+        }
+        
+        h1 {
+            font-size: 38px;
+            line-height: 1.2;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 48px;
+            }
+        }
+        
+        .hero-subheading {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #4a4a4a;
+            margin-bottom: 28px;
+        }
+        
+        .hero-outcome {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #1a1a1a;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        
+        .cta-button:hover {
+            background: #333333;
+        }
+        
+        .cta-note {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #6a6a6a;
+        }
+        
+        /* Sections */
+        section {
+            padding: 64px 0;
+            border-top: 1px solid #e8e8e8;
+        }
+        
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+        
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #3a3a3a;
+            margin-bottom: 20px;
+        }
+        
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Outcome list */
+        .outcome-list {
+            list-style: none;
+            margin-top: 28px;
+        }
+        
+        .outcome-list li {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #3a3a3a;
+            margin-bottom: 16px;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .outcome-list li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #1a1a1a;
+        }
+        
+        /* How it works */
+        .steps {
+            margin-top: 32px;
+        }
+        
+        .step {
+            margin-bottom: 32px;
+        }
+        
+        .step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            display: none;
+        }
+        
+        .step h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .step p {
+            font-size: 16px;
+        }
+        
+        /* Included/Not included */
+        .scope-grid {
+            display: grid;
+            gap: 40px;
+            margin-top: 32px;
+        }
+        
+        @media (min-width: 640px) {
+            .scope-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .scope-column h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        
+        .scope-list {
+            list-style: none;
+        }
+        
+        .scope-list li {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .included li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #1a1a1a;
+        }
+        
+        .not-included li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #9a9a9a;
+        }
+        
+        /* Pricing */
+        .pricing-box {
+            margin-top: 32px;
+            padding: 32px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        
+        .price {
+            font-size: 42px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+        
+        .price-period {
+            font-size: 17px;
+            color: #4a4a4a;
+            margin-bottom: 16px;
+        }
+        
+        .pricing-note {
+            font-size: 15px;
+            color: #4a4a4a;
+            margin-bottom: 4px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: left;
+        }
+        
+        .cta-section p {
+            margin-bottom: 28px;
+            max-width: 560px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid #e8e8e8;
+            margin-top: 64px;
+        }
+        
+        footer p {
+            font-size: 14px;
+            color: #6a6a6a;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Baseline</div>
+                <nav>
+                    <a href="#problem">Problem</a>
+                    <a href="#outcome">Outcome</a>
+                    <a href="#how">How</a>
+                    <a href="#pricing">Pricing</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Social media infrastructure for accountancy firms</h1>
+                <p class="hero-subheading">Quiet maintenance that keeps your firm looking credible and consistent online.</p>
+                <p class="hero-outcome">Within 30 days, prospects checking your firm online see a consistent, professional presence rather than an abandoned or messy profile.</p>
+                <a href="https://www.instagram.com/baselinegrowth/" class="cta-button">Message us on Instagram for a free preview</a>
+                <p class="cta-note">Low commitment. We'll show you what your feed could look like.</p>
+            </div>
+        </section>
+
+        <section id="problem">
+            <div class="container">
+                <h2>The problem</h2>
+                <p>Your clients expect to find you online. So do prospects. They check LinkedIn. They look at Instagram. They want to see that you're real, active, and established.</p>
+                
+                <p>But your last post was four months ago. Or your feed is inconsistent. Or it looks like you tried once and gave up. None of this suggests the careful, reliable service you actually provide.</p>
+                
+                <p>You're too busy to become a content creator. You don't want to be on social media. But an empty or neglected profile does quiet damage to your reputation. That's the problem we solve.</p>
+            </div>
+        </section>
+
+        <section id="outcome">
+            <div class="container">
+                <h2>What changes after 30 days</h2>
+                <ul class="outcome-list">
+                    <li>Your profile looks current and cared for when prospects check it</li>
+                    <li>Regular posts appear without you having to think about it</li>
+                    <li>Your firm looks consistent and credible, not abandoned or amateurish</li>
+                    <li>You're no longer self-conscious about directing people to your social presence</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="how">
+            <div class="container">
+                <h2>How it works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>We learn your firm</h3>
+                        <p>A short call to understand your positioning, tone, and what you're comfortable sharing publicly.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>We maintain your presence</h3>
+                        <p>Regular posts, consistent visuals, calendar-aligned updates. All handled quietly in the background.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>You approve or ignore</h3>
+                        <p>Posts are sent for your approval. If you don't respond, we proceed. If something's wrong, you let us know.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2>What's included and what's not</h2>
+                <div class="scope-grid">
+                    <div class="scope-column included">
+                        <h3>Included</h3>
+                        <ul class="scope-list">
+                            <li>Regular posting schedule</li>
+                            <li>Consistent visual style</li>
+                            <li>Calendar-aligned updates</li>
+                            <li>Professional tone in captions</li>
+                            <li>Approval process before posting</li>
+                        </ul>
+                    </div>
+                    <div class="scope-column not-included">
+                        <h3>Not included</h3>
+                        <ul class="scope-list">
+                            <li>Personal branding or thought leadership</li>
+                            <li>Filming or photography sessions</li>
+                            <li>Paid advertising or campaigns</li>
+                            <li>Replying to comments or messages</li>
+                            <li>Community management</li>
+                            <li>Growth strategies or daily reporting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing">
+            <div class="container">
+                <h2>Pricing</h2>
+                <div class="pricing-box">
+                    <div class="price">£395</div>
+                    <div class="price-period">per month</div>
+                    <p class="pricing-note">Cancel anytime.</p>
+                    <p class="pricing-note">Built for small firms who want this handled quietly.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Start with a preview</h2>
+                <p>We'll prepare a few sample posts that show what your feed could look like. No obligation. Just a clear picture of what consistent presence means for your firm.</p>
+                <a href="https://www.instagram.com/baselinegrowth/" class="cta-button">Message us on Instagram</a>
+                <p class="cta-note">Low commitment. We'll show you what your feed could look like.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Baseline. Social media infrastructure for professional services.</p>
+        </div>
+    </footer>
+</body>
 </html>
